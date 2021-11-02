@@ -1,0 +1,1 @@
+Driver={SQL Server};Server=localhost;Database=sad_test;UID=root;PWD=123456;

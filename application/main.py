@@ -1,7 +1,7 @@
 from datetime import date, timedelta, datetime
 import calendar
 import locale
-import pyodbc
+import pypyodbc as pyodbc
 
 try:
     locale.setlocale(locale.LC_ALL, 'pt_BR')
@@ -11,22 +11,6 @@ except:
 
 # pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER=localhost;DATABASE=testdb;UID=me;PWD=pass')
 
-# Table
-# DIM_TEMPO
-# Id_tempo
-# Data
-# Dia
-# Dia Semana
-# FimSemana
-# Quinzena
-# Mes
-# NomeMes
-# FimMes
-# Trimestre
-# NomeTrimestre
-# Semestre
-# NomeSemestre
-# Ano
 
 def get_week_day_name(n):
     if n == 0:
