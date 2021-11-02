@@ -97,7 +97,7 @@ while flag:
             "insert into DIM_TEMPO(Data, Dia, DiaSemana, FimSemana, Quinzena, Mes, NomeMes, FimMes, Trimestre, NomeTrimestre, Semestre, NomeSemestre, Ano) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
             single_date.strftime("%Y%m%d"), int(day), get_week_day_name(weekDay), isWeekend(weekDay), get_quinzena(int(day)), int(month), single_date.strftime("%B").title(),
             isEndOfMonth(day, calendar.monthrange(int(year), int(month))[1]), get_trimestre(int(month)), get_trimestre_name(get_trimestre(int(month)), int(year)), get_semestre(int(month)),
-            get_semestre_name(get_semestre(int(month)), int(year)), year)
+            get_semestre_name(get_semestre(int(month)), int(year)), int(year))
 
 
         print('Data:', single_date.strftime("%d-%m-%Y"))
