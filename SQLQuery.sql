@@ -3,7 +3,7 @@ use sad_test;
 
 CREATE TABLE DIM_TEMPO (
 	Id_Tempo int IDENTITY(1,1) NOT NULL,
-	Data datetime NOT NULL,
+	Data datetime NOT NULL unique,
 	Dia smallint NOT NULL,
 	DiaSemana varchar(25) NOT NULL,
 	FimSemana char(3) NOT NULL,

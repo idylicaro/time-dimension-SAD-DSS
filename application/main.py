@@ -1,7 +1,7 @@
 from datetime import date, timedelta, datetime
 import calendar
 import locale
-import pypyodbc as pyodbc
+import pyodbc as pyodbc
 
 try:
     locale.setlocale(locale.LC_ALL, 'pt_BR')
@@ -63,6 +63,8 @@ with open('./url.txt', 'r') as f:
 old_start_date = start_date = datetime.strptime(input('Data inicial (dd/mm/year):'), '%d/%m/%Y').date()
 old_end_date = end_date = datetime.strptime(input('Data final (dd/mm/year):'), '%d/%m/%Y').date()
 
+print('\nAguarde um momento...\n')
+
 history = [(old_start_date, old_end_date)]
 
 connection = pyodbc.connect(DB_URL)
@@ -82,37 +84,39 @@ while flag:
             single_date.strftime("%Y%m%d"), int(day), get_week_day_name(weekDay), isWeekend(weekDay), get_quinzena(int(day)), int(month), single_date.strftime("%B").title(),
             isEndOfMonth(day, calendar.monthrange(int(year), int(month))[1]), get_trimestre(int(month)), get_trimestre_name(get_trimestre(int(month)), int(year)), get_semestre(int(month)),
             get_semestre_name(get_semestre(int(month)), int(year)), int(year))
+        connection.commit()
 
+        # print('Data:', single_date.strftime("%d-%m-%Y"))
+        # print('Dia:', day)
+        # print(get_week_day_name(weekDay))
+        # print('FimdeSemana:', isWeekend(weekDay))
+        # print('Quinzena:', get_quinzena(int(day)))
+        # print('Mes:', month)
+        # print(single_date.strftime("%B").title())
+        # print('FimdeMes:', isEndOfMonth(day, calendar.monthrange(int(year), int(month))[1]))
+        # print('Trimestre:', get_trimestre(int(month)))
+        # print(get_trimestre_name(get_trimestre(int(month)), int(year)))
+        # print('Semestre:', get_semestre(int(month)))
+        # print(get_semestre_name(get_semestre(int(month)), int(year)))
+        # print('Ano:', year)
+        # print('\n')
 
-        print('Data:', single_date.strftime("%d-%m-%Y"))
-        print('Dia:', day)
-        print(get_week_day_name(weekDay))
-        print('FimdeSemana:', isWeekend(weekDay))
-        print('Quinzena:', get_quinzena(int(day)))
-        print('Mes:', month)
-        print(single_date.strftime("%B").title())
-        print('FimdeMes:', isEndOfMonth(day, calendar.monthrange(int(year), int(month))[1]))
-        print('Trimestre:', get_trimestre(int(month)))
-        print(get_trimestre_name(get_trimestre(int(month)), int(year)))
-        print('Semestre:', get_semestre(int(month)))
-        print(get_semestre_name(get_semestre(int(month)), int(year)))
-        print('Ano:', year)
-        print('\n')
+    want_continue = input("Digite 'y' se quer continuar a incluir mais datas e 'n' para parar: ")
+    if want_continue != 'y':
+        flag = False
+        exit(1)
 
-        want_continue = input("Digite 'y' se quer continuar a incluir mais datas e 'n' para parar: ")
-        if want_continue != 'y':
+    start_date = datetime.strptime(input('Data inicial (dd/mm/year):'), '%d/%m/%Y').date()
+    end_date = datetime.strptime(input('Data final (dd/mm/year):'), '%d/%m/%Y').date()
+
+    print('\nAguarde um momento...\n')
+
+    for x in history:
+        # Start 02/11/2021 < End 21/11/2021 Break
+        # End 21/11/2021 > Start 02/11/2021 Break
+        if start_date < x[1] or end_date > x[0]:
+            print('Esta data é invalida, vai gerar duplicidade!')
             flag = False
             exit(1)
 
-        start_date = datetime.strptime(input('Data inicial (dd/mm/year):'), '%d/%m/%Y').date()
-        end_date = datetime.strptime(input('Data final (dd/mm/year):'), '%d/%m/%Y').date()
 
-        for x in history:
-            # Start 02/11/2021 < End 21/11/2021 Break
-            # End 21/11/2021 > Start 02/11/2021 Break
-            if start_date < x[1] or end_date > x[0]:
-                print('Esta data é invalida, vai gerar duplicidade!')
-                flag = False
-                exit(1)
-
-connection.commit()

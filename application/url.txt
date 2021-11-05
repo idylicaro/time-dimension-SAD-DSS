@@ -1,1 +1,1 @@
-Driver={SQL Server};Server=localhost;Database=sad_test;UID=root;PWD=123456;
+Driver={SQL Server};Server=DESKTOP-7S8FN3H;Database=sad_test;trusted_connection=true;UID=sa;
