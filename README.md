@@ -15,4 +15,21 @@ Exercise about time dimension in DSS
 
 #### Example
 
+Input ```16/11/2021```
 
+Input ```20/12/2021```
+
+Input ```y```
+
+Input ```21/12/2021```
+
+Input ```06/01/2022```
+
+Input ```n```
+
+Output:
+![image](https://user-images.githubusercontent.com/45442467/141992857-bee45bf1-29e4-4b59-8797-a0ed925bad47.png)
+
+
+
+![image](https://user-images.githubusercontent.com/45442467/141992026-3b94eaf5-df31-415f-a0c1-a0a16a4d7258.png)
