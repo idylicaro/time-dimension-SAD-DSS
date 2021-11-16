@@ -63,6 +63,10 @@ with open('./url.txt', 'r') as f:
 old_start_date = start_date = datetime.strptime(input('Data inicial (dd/mm/year):'), '%d/%m/%Y').date()
 old_end_date = end_date = datetime.strptime(input('Data final (dd/mm/year):'), '%d/%m/%Y').date()
 
+while end_date <= start_date:
+    print('Digite uma data final valida! (a data final não pode ser menor que a inicial)')
+    old_end_date = end_date = datetime.strptime(input('Data final (dd/mm/year):'), '%d/%m/%Y').date()
+
 print('\nAguarde um momento...\n')
 
 history = [(old_start_date, old_end_date)]
@@ -108,15 +112,15 @@ while flag:
 
     start_date = datetime.strptime(input('Data inicial (dd/mm/year):'), '%d/%m/%Y').date()
     end_date = datetime.strptime(input('Data final (dd/mm/year):'), '%d/%m/%Y').date()
+    while end_date <= start_date:
+        print('Digite uma data final valida! (a data final não pode ser menor que a inicial)')
+        end_date = datetime.strptime(input('Data final (dd/mm/year):'), '%d/%m/%Y').date()
 
     print('\nAguarde um momento...\n')
 
     for x in history:
-        # Start 02/11/2021 < End 21/11/2021 Break
-        # End 21/11/2021 > Start 02/11/2021 Break
-        if start_date < x[1] or end_date > x[0]:
+        if not ((start_date < x[0] < end_date) or start_date > x[1]):
             print('Esta data é invalida, vai gerar duplicidade!')
             flag = False
             exit(1)
-
 
